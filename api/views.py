@@ -1,16 +1,23 @@
-from django.http import HttpRequest, HttpResponse
-import json
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.views import View
 
 
-def test_view(request: HttpRequest) -> HttpResponse:
-    if request.method == "GET":
+class TestView(View):
+    def get(self, request: HttpRequest) -> JsonResponse:
+        
+        return JsonResponse(
+            data={
+                "message": "ok"
+            },
+            status=201
+        )
+
+    def post(self):
         pass
-    
-    if request.method == 'POST':
 
-        body = request.body.decode()
-        data = json.loads(body)
-        print(data)
-        print(type(data))
+    def put(self):
+        pass
 
-    return HttpResponse("ok")
+    def delete(self):
+        pass
+
